@@ -18,6 +18,7 @@ package services.mocks
 
 import models._
 import org.scalamock.scalatest.MockFactory
+import org.scalatest.OneInstancePerTest
 import play.api.libs.json.Format
 import services._
 import uk.gov.hmrc.http.HeaderCarrier
@@ -25,7 +26,7 @@ import utils.TestUtil
 
 import scala.concurrent.ExecutionContext
 
-abstract class MockStoredAnswersService[T] extends TestUtil with MockFactory {
+abstract class MockStoredAnswersService[T] extends TestUtil with OneInstancePerTest with MockFactory {
 
   val mockStoredAnswersService: StoredAnswersService[T]
 
