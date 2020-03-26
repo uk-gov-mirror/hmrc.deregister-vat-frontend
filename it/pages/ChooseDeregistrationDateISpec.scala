@@ -39,7 +39,7 @@ class ChooseDeregistrationDateISpec extends IntegrationBaseSpec {
 
   "Calling the GET Choose Deregistration Date endpoint" when {
 
-    def getRequest: WSResponse = get("/deregister-date", formatPendingDereg(Some("false")))
+    def getRequest: WSResponse = get("/choose-cancel-vat-date", formatPendingDereg(Some("false")))
 
     "the user is authorised" should {
 
@@ -92,7 +92,7 @@ class ChooseDeregistrationDateISpec extends IntegrationBaseSpec {
 
   "Calling the GET Deregistration date endpoint" when {
 
-    def getRequest(pendingDereg: Option[String]): WSResponse = get("/deregister-date", formatPendingDereg(pendingDereg))
+    def getRequest(pendingDereg: Option[String]): WSResponse = get("/cancel-vat-date", formatPendingDereg(pendingDereg))
 
     "user has a pending dereg request" should {
 
@@ -157,7 +157,7 @@ class ChooseDeregistrationDateISpec extends IntegrationBaseSpec {
   "Calling the POST Choose Deregistration Date endpoint" when {
 
     def postRequest(data: ChooseDeregistrationDateModel): WSResponse =
-      post("/deregister-date")(toFormData(ChooseDeregistrationDateForm.deregistrationDateForm("yesNoError"), data))
+      post("/choose-cancel-vat-date")(toFormData(ChooseDeregistrationDateForm.deregistrationDateForm("yesNoError"), data))
 
     "the user is authorised" when {
 

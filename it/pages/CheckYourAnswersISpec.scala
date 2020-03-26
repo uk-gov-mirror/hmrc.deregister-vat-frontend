@@ -243,7 +243,7 @@ class CheckYourAnswersISpec extends IntegrationBaseSpec {
 
             response should have(
               httpStatus(SEE_OTHER),
-              redirectURI("/vat-through-software/account/deregister/deregister-request-received")
+              redirectURI("/vat-through-software/account/cancel-vat/cancel-vat-request-received")
             )
           }
         }
@@ -278,7 +278,7 @@ class CheckYourAnswersISpec extends IntegrationBaseSpec {
 
             response should have(
               httpStatus(SEE_OTHER),
-              redirectURI("/vat-through-software/account/deregister/deregister-request-received")
+              redirectURI("/vat-through-software/account/cancel-vat/cancel-vat-request-received")
             )
           }
         }
@@ -313,7 +313,7 @@ class CheckYourAnswersISpec extends IntegrationBaseSpec {
 
             response should have(
               httpStatus(SEE_OTHER),
-              redirectURI("/vat-through-software/account/deregister/deregister-request-received")
+              redirectURI("/vat-through-software/account/cancel-vat/cancel-vat-request-received")
             )
           }
         }
@@ -348,7 +348,7 @@ class CheckYourAnswersISpec extends IntegrationBaseSpec {
 
             response should have(
               httpStatus(SEE_OTHER),
-              redirectURI("/vat-through-software/account/deregister/deregister-request-received")
+              redirectURI("/vat-through-software/account/cancel-vat/cancel-vat-request-received")
             )
           }
         }
