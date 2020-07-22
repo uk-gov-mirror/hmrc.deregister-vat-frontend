@@ -64,23 +64,21 @@ val compile: Seq[ModuleID] = Seq(
 )
 
 def test(scope: String = "test, it"): Seq[ModuleID] = Seq(
-  "uk.gov.hmrc"             %% "bootstrap-play-26"            % "1.7.0"             % scope classifier "tests",
+  "uk.gov.hmrc"             %% "bootstrap-play-26"            % "1.14.0"            % scope classifier "tests",
   "uk.gov.hmrc"             %% "hmrctest"                     % "3.9.0-play-26"     % scope,
   "org.scalatest"           %% "scalatest"                    % "3.0.8"             % scope,
-  "org.pegdown"             % "pegdown"                       % "1.6.0"             % scope,
-  "org.jsoup"               % "jsoup"                         % "1.13.1"            % scope,
+  "org.pegdown"             %  "pegdown"                      % "1.6.0"             % scope,
+  "org.jsoup"               %  "jsoup"                        % "1.13.1"            % scope,
   "com.typesafe.play"       %% "play-test"                    % PlayVersion.current % scope,
   "org.scalatestplus.play"  %% "scalatestplus-play"           % "3.1.3"             % scope,
   "org.scalamock"           %% "scalamock-scalatest-support"  % "3.6.0"             % scope,
-  "com.github.tomakehurst"  % "wiremock-jre8"                 % "2.26.3"            % scope
+  "com.github.tomakehurst"  %  "wiremock-jre8"                % "2.26.3"            % scope
 )
 
 def oneForkedJvmPerTest(tests: Seq[TestDefinition]): Seq[Group] = tests map {
   test =>
-    Group(
-      test.name,
-      Seq(test),
-      SubProcess(ForkOptions().withRunJVMOptions(Vector("-Dtest.name=" + test.name, "-Dlogger.resource=logback-test.xml"))
+    Group(test.name, Seq(test), SubProcess(
+      ForkOptions().withRunJVMOptions(Vector("-Dtest.name=" + test.name, "-Dlogger.resource=logback-test.xml"))
     ))
 }
 
