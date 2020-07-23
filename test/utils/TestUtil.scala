@@ -24,7 +24,7 @@ import mocks.MockAppConfig
 import models.User
 import org.scalatest.BeforeAndAfterEach
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.Configuration
+import play.api.{Configuration, Logger}
 import play.api.i18n.{Lang, Messages, MessagesApi, MessagesImpl}
 import play.api.inject.Injector
 import play.api.mvc.{AnyContentAsEmpty, MessagesControllerComponents}
