@@ -64,17 +64,35 @@ val compile: Seq[ModuleID] = Seq(
 )
 
 def test(scope: String = "test, it"): Seq[ModuleID] = Seq(
-  "uk.gov.hmrc"             %% "bootstrap-play-26"            % "1.14.0"            % scope classifier "tests",
   "uk.gov.hmrc"             %% "hmrctest"                     % "3.9.0-play-26"     % scope,
-  "org.scalatest"           %% "scalatest"                    % "3.1.0"             % scope,
+  "org.scalatest"           %% "scalatest"                    % "3.0.8"             % scope,
   "org.pegdown"             %  "pegdown"                      % "1.6.0"             % scope,
   "org.jsoup"               %  "jsoup"                        % "1.13.1"            % scope,
   "com.typesafe.play"       %% "play-test"                    % PlayVersion.current % scope,
-  "org.scalatestplus.play"  %% "scalatestplus-play"           % "3.1.2"             % scope,
+  "org.scalatestplus.play"  %% "scalatestplus-play"           % "3.1.3"             % scope,
   "org.scalamock"           %% "scalamock-scalatest-support"  % "3.6.0"             % scope,
-  "com.github.tomakehurst"  %  "wiremock-jre8"                % "2.27.0"            % scope,
+  "com.github.tomakehurst"  %  "wiremock-jre8"                % "2.27.1"            % scope,
   "com.vladsch.flexmark"    % "flexmark-all"                  % "0.35.10"           % scope
 )
+
+/*
+val compile = Seq(
+  ws,
+  "uk.gov.hmrc" %% "bootstrap-backend-play-26" % "2.24.0",
+  "com.typesafe.play" %% "play-json-joda" % "2.6.10"
+)
+
+def test(scope: String = "test,it"): Seq[ModuleID] = Seq(
+  "uk.gov.hmrc" %% "hmrctest" % "3.9.0-play-26" % scope,
+  "org.scalatest" %% "scalatest" % "3.0.8" % scope,
+  "org.pegdown" % "pegdown" % "1.6.0" % scope,
+  "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.3" % scope,
+  "com.typesafe.play" %% "play-test" % PlayVersion.current % scope,
+  "org.mockito" % "mockito-core" % "3.2.0" % scope,
+  "com.github.tomakehurst" % "wiremock-jre8" % "2.27.1" % scope,
+  "org.jsoup" % "jsoup" % "1.12.1" % scope
+)
+ */
 
 def oneForkedJvmPerTest(tests: Seq[TestDefinition]): Seq[Group] = tests map {
   test =>

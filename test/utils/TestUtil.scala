@@ -27,13 +27,12 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.{Configuration, Logger}
 import play.api.i18n.{Lang, Messages, MessagesApi, MessagesImpl}
 import play.api.inject.Injector
-import play.api.mvc.{AnyContentAsEmpty, MessagesControllerComponents}
+import play.api.mvc.{AnyContent, AnyContentAsEmpty, ControllerComponents, DefaultActionBuilder, DefaultMessagesActionBuilderImpl, DefaultMessagesControllerComponents, MessagesActionBuilder, MessagesControllerComponents}
 import play.api.test.FakeRequest
 import services.ContactPreferencesService
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.test._
-import uk.gov.hmrc.play.bootstrap.tools.Stubs.stubMessagesControllerComponents
-
+import play.api.test.Helpers.{stubBodyParser, stubControllerComponents, stubMessagesApi}
 import scala.concurrent.ExecutionContext
 
 trait TestUtil extends UnitSpec with GuiceOneAppPerSuite with BeforeAndAfterEach with MaterializerSupport {
@@ -47,7 +46,21 @@ trait TestUtil extends UnitSpec with GuiceOneAppPerSuite with BeforeAndAfterEach
     mockConfig.features.zeroRatedJourney(true)
     SharedMetricRegistries.clear()
   }
-  lazy val mcc: MessagesControllerComponents = stubMessagesControllerComponents()
+
+  private lazy val cc: ControllerComponents = stubControllerComponents()
+
+  private lazy val messagesActionBuilder: MessagesActionBuilder =
+    new DefaultMessagesActionBuilderImpl(stubBodyParser[AnyContent](), stubMessagesApi())
+
+  lazy val mcc: MessagesControllerComponents = DefaultMessagesControllerComponents(
+    messagesActionBuilder,
+    DefaultActionBuilder(stubBodyParser[AnyContent]()),
+    cc.parsers,
+    fakeApplication.injector.instanceOf[MessagesApi],
+    cc.langs,
+    cc.fileMimeTypes,
+    ExecutionContext.global
+  )
   lazy implicit val config: Configuration = app.configuration
   lazy implicit val mockConfig: MockAppConfig = new MockAppConfig
   lazy implicit val mockUserContactPref: ContactPreferencesService = injector.instanceOf[ContactPreferencesService]
